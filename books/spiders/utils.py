@@ -5,6 +5,17 @@ class BookScraper:
     def __init__(self, response: Response) -> None:
         self.response = response
 
+    def get_book_dict(self) -> dict:
+        return dict(
+            title=self.get_title(),
+            price=self.get_price(),
+            amount_in_stock=self.get_amount_in_stock(),
+            rating=self.get_rating(),
+            category=self.get_category(),
+            description=self.get_description(),
+            upc=self.get_upc()
+        )
+
     def get_title(self) -> str:
         item = self.response.css(".product_main > h1::text").get()
         return item

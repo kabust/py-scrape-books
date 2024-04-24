@@ -32,13 +32,4 @@ class BooksSpider(scrapy.Spider):
     @staticmethod
     def _scrape_single_book(response: Response) -> dict:
         book_scraper = BookScraper(response)
-
-        yield dict(
-            title=book_scraper.get_title(),
-            price=book_scraper.get_price(),
-            amount_in_stock=book_scraper.get_amount_in_stock(),
-            rating=book_scraper.get_rating(),
-            category=book_scraper.get_category(),
-            description=book_scraper.get_description(),
-            upc=book_scraper.get_upc()
-        )
+        yield book_scraper.get_book_dict()
