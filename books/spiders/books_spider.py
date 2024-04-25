@@ -1,3 +1,5 @@
+from typing import Generator
+
 import scrapy
 from scrapy.http import Response
 
@@ -13,7 +15,7 @@ class BooksSpider(scrapy.Spider):
         super().__init__(**kwargs)
         self.base_url = "https://books.toscrape.com/catalogue/"
 
-    def parse(self, response: Response, **kwargs) -> scrapy.Request:
+    def parse(self, response: Response, **kwargs) -> Generator[scrapy.Request, Response]:
         next_page = response.css("li.next > a::attr(href)").get()
         urls = self._get_page_urls(response)
 
